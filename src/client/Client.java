@@ -3,8 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package armazemclient;
+package client;
 
+import client_interface.Login;
 import comands.Command;
 import java.io.IOException;
 import java.io.ObjectInputStream;
@@ -20,13 +21,25 @@ public class Client implements Runnable {
     private static final String host = "localhost";
     private static final int PORT = 1200;
     private final Socket socket;
+    private Login login;
     public ObjectInputStream In;
     public ObjectOutputStream Out;
+    public boolean keepRunning;
     
-    private ClientDetails cliente;
+    //TODO:
+    public ClientDetails cliente;
     
     public Client() throws IOException{
+        login = null;
+        socket = new Socket(host,PORT);
         
+        Out = new ObjectOutputStream(socket.getOutputStream());
+        //Out.flush();
+        In = new ObjectInputStream(socket.getInputStream());
+        
+    }
+    public Client(Login l) throws IOException{
+        login = l;
         socket = new Socket(host,PORT);
         
         Out = new ObjectOutputStream(socket.getOutputStream());
@@ -37,13 +50,14 @@ public class Client implements Runnable {
     
     @Override
     public void run() {
-        boolean keepRunning = true;
+        keepRunning = true;
         while(keepRunning){
             try{
                 Command cmd = (Command) In.readObject();
                 System.out.println("Incoming : "+cmd.toString());
                 
-                //Metodo Tratar Command
+                //Metodo MessageHandler(
+                MessageHandler msgHandle = new MessageHandler(login);
                 
                 
             } catch (Exception ex) {
@@ -63,5 +77,4 @@ public class Client implements Runnable {
             System.out.println("Exception SocketClient send()");
         }
     }
-    
 }
