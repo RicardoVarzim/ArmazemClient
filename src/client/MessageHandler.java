@@ -6,12 +6,9 @@
 package client;
 
 
-import client_interface.Login;
+import gui.Login;
 import comands.Command;
 import java.util.ArrayList;
-import java.util.List;
-import java.util.StringTokenizer;
-import java.util.TreeMap;
 
 /**
  *
@@ -31,58 +28,66 @@ public class MessageHandler {
         this.cmd = cmd;
     }
     
-    public Command ResolveMessage(Command c) {
+    public void ResolveMessage(Command c) {
         this.cmd = c;
         
         if(cmd!=null){
             switch(cmd.type){
                 case "registar_cliente":{
                     System.out.println((boolean)cmd.result);
-                    return cmd;
+                    break;
                 }
                 case "cliente_login":{
                     System.out.println((boolean)cmd.result);
-                    return cmd;
+                    if((boolean)cmd.result)
+                        ui.switchToMainWindow();
+                    break;
                 }
                 case "listar_clientes":{
-                    return cmd;
-                }
-                case "abastecer":{
-                    return cmd;
+                    System.out.println((String)cmd.result);
+                    break;
                 }
                 case "definir_tarefa":{
-                    return cmd;
+                    System.out.println((boolean)cmd.result);
+                    break;
                 }
                 case "iniciar_tarefa":{
-                    return cmd;
+                    System.out.println((long)cmd.result);
+                    break;
                 }
                 case "concluir_tarefa":{
-                    return cmd;
+                    System.out.println((String)cmd.result);
+                    break;
                 }
                 case "pedido_notificacao":{
-                    return cmd;
+                    System.out.println((boolean)cmd.result);
+                    break;
                 }
                 case "listar_notificacoes":{
-                    return cmd;
+                    System.out.println((ArrayList<String>)cmd.result);
+                    break;
                 }
                 case "listar_items":{
-                    return cmd;
+                    System.out.println((String)cmd.result);
+                    break;
                 }
                 case "listar_tarefas":{
-                    return cmd;
+                    System.out.println((String)cmd.result);
+                    break;
                 }
                 case "listar_tarefas_activas":{
-                    return cmd;
+                    System.out.println((String)cmd.result);
+                    break;
                 }
                 case "listar_tarefas_concluidas":{
-                    return cmd;
+                    System.out.println((String)cmd.result);
+                    break;
                 }
                 default:
-                    return cmd;
+                    System.out.println((String)cmd.result);
             }
         }else{
-            cmd.result ="Invalid Command!\n";
-            return cmd;
+            System.out.println("Invalid Command!\n");
         }
         
     }

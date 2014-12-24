@@ -5,7 +5,7 @@
  */
 package client;
 
-import client_interface.Login;
+import gui.Login;
 import comands.Command;
 import java.io.IOException;
 import java.io.ObjectInputStream;
@@ -34,7 +34,7 @@ public class Client implements Runnable {
         socket = new Socket(host,PORT);
         
         Out = new ObjectOutputStream(socket.getOutputStream());
-        //Out.flush();
+        Out.flush();
         In = new ObjectInputStream(socket.getInputStream());
         
     }
@@ -43,7 +43,7 @@ public class Client implements Runnable {
         socket = new Socket(host,PORT);
         
         Out = new ObjectOutputStream(socket.getOutputStream());
-        //Out.flush();
+        Out.flush();
         In = new ObjectInputStream(socket.getInputStream());
         
     }
@@ -51,14 +51,13 @@ public class Client implements Runnable {
     @Override
     public void run() {
         keepRunning = true;
+        Command cmd;
+        MessageHandler messageHandle = new MessageHandler(login);
+        
         while(keepRunning){
             try{
-                Command cmd = (Command) In.readObject();
-                System.out.println("Incoming : "+cmd.toString());
-                
-                //Metodo MessageHandler(
-                MessageHandler msgHandle = new MessageHandler(login);
-                
+                cmd = (Command) In.readObject();
+                messageHandle.ResolveMessage(cmd);
                 
             } catch (Exception ex) {
                 keepRunning = false;
@@ -69,9 +68,13 @@ public class Client implements Runnable {
     
     public void send(Command cmd){
         try {
-            Out.writeObject(cmd);
-            Out.flush();
-            System.out.println("Outgoing : "+cmd.toString());
+            if(cmd.type == "close")
+                this.keepRunning = false;
+            else{
+                Out.writeObject(cmd);
+                Out.flush();
+                //System.out.println("Outgoing : "+cmd.toString());
+            }
         } 
         catch (IOException ex) {
             System.out.println("Exception SocketClient send()");

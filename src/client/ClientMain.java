@@ -19,7 +19,8 @@ public class ClientMain {
         Command cmd1 = new Command("registar_cliente","1",new Object[]{"Mohinder2","123456"});
         Command cmd2 = new Command("cliente_login","1",new Object[]{"Mohinder2","123456"});
         Command cmd3 = new Command("abastecer","1",new Object[]{"parafuso",10});
-        Command cmd4 = new Command("listar_clientes","1", new Object[]{});
+        Command cmd4 = new Command("listar_clientes","1", new Object[]{""});
+        Command cmd5 = new Command("close","1", new Object[]{""});
         
         try {
             Client cliente = new Client();
@@ -27,8 +28,11 @@ public class ClientMain {
             t.start();
             cliente.send(cmd1);
             cliente.send(cmd2);
+            cliente.send(cmd1);
+            cliente.send(cmd2);
             cliente.send(cmd3);
             cliente.send(cmd4);
+            cliente.send(cmd5);
         } catch (Exception ex) {
             System.out.println(ex.getMessage());
         }
