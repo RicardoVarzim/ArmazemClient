@@ -6,8 +6,8 @@
 package client;
 
 
-import gui.Login;
 import comands.Command;
+import gui.MainFrame;
 import java.util.ArrayList;
 
 /**
@@ -16,15 +16,14 @@ import java.util.ArrayList;
  */
 public class MessageHandler {
     
-    private Login ui;
     private Command cmd;
+    public MainFrame ui;
     
-    public MessageHandler(Login f){
-        ui = f;
+    public MessageHandler(MainFrame ui){
+        this.ui = ui;
     }
     
-    public MessageHandler(Login f, Command cmd){
-        this.ui = f;
+    public MessageHandler(Command cmd){
         this.cmd = cmd;
     }
     
@@ -34,13 +33,16 @@ public class MessageHandler {
         if(cmd!=null){
             switch(cmd.type){
                 case "registar_cliente":{
-                    System.out.println((boolean)cmd.result);
+                    if((boolean)cmd.result)
+                        ui.jTextArea.append("[Application > Me] : Utilizador "+(String)cmd.args.listArgs.get(0)+" registado \n");
                     break;
                 }
                 case "cliente_login":{
                     System.out.println((boolean)cmd.result);
-                    if((boolean)cmd.result)
-                        ui.switchToMainWindow();
+                    if((boolean)cmd.result){
+                        ui.jTextArea.append("[Application > Me] : Login "+(String)cmd.args.listArgs.get(0)+" efectuado \n");
+                        ui.LoginSucess();
+                    }
                     break;
                 }
                 case "listar_clientes":{
