@@ -34,20 +34,26 @@ public class MessageHandler {
             switch(cmd.type){
                 case "registar_cliente":{
                     if((boolean)cmd.result)
-                        ui.jTextArea.append("[Application > Me] : Utilizador "+(String)cmd.args.listArgs.get(0)+" registado \n");
+                        ui.jTextArea.append("[Application > Me] : Utilizador "+(String)cmd.args.listArgs.get(0)+" registado! \n");
+                     else{
+                        ui.jTextArea.append("[Application > Me] : Utilizador "+(String)cmd.args.listArgs.get(0)+" inválido! \n");
+                    }
                     break;
                 }
                 case "cliente_login":{
                     System.out.println((boolean)cmd.result);
                     if((boolean)cmd.result){
-                        ui.jTextArea.append("[Application > Me] : Login "+(String)cmd.args.listArgs.get(0)+" efectuado \n");
+                        ui.jTextArea.append("[Application > Me] : Login "+(String)cmd.args.listArgs.get(0)+" efectuado! \n");
                         ui.LoginSucess();
+                    }
+                    else{
+                        ui.jTextArea.append("[Application > Me] : Login "+(String)cmd.args.listArgs.get(0)+" inválido! \n");
                     }
                     break;
                 }
                 case "definir_tarefa":{
                     if((boolean)cmd.result){
-                        ui.jTextArea.append("[Application > Me] : Tarefa "+(String)cmd.args.listArgs.get(0)+" iniciada \n");
+                        ui.jTextArea.append("[Application > Me] : Tarefa "+(String)cmd.args.listArgs.get(0)+" registada \n");
                     }
                     else{
                         ui.jTextArea.append("[Application > Me] : Erro ao definir tarefa "+(String)cmd.args.listArgs.get(0)+"\n");
@@ -55,11 +61,20 @@ public class MessageHandler {
                     break;
                 }
                 case "iniciar_tarefa":{
-                    System.out.println((long)cmd.result);
+                     if((boolean)cmd.result){
+                        ui.jTextArea.append("[Application > Me] : Tarefa iníciada com o id.: "+(String)cmd.args.listArgs.get(0)+"\n");
+                        //ui.jTabbedPane1.selectedIndex(2) actualizar a lista de tarefas!!!
+                    }
+                    else{
+                        ui.jTextArea.append("[Application > Me] : Erro ao iníciar a tarefa! \n");
+                    }
                     break;
                 }
                 case "concluir_tarefa":{
-                    System.out.println((String)cmd.result);
+                    if((boolean)cmd.result){
+                        ui.jTextArea.append("[Application > Me] : Tarefa "+(String)cmd.args.listArgs.get(0)+"\n");
+                        //ui.jTabbedPane1.selectedIndex(2) actualizar a lista de tarefas a s!!!
+                    }
                     break;
                 }
                 case "pedido_notificacao":{
