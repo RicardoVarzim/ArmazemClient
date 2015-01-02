@@ -45,12 +45,13 @@ public class MessageHandler {
                     }
                     break;
                 }
-                case "listar_clientes":{
-                    System.out.println((String)cmd.result);
-                    break;
-                }
                 case "definir_tarefa":{
-                    System.out.println((boolean)cmd.result);
+                    if((boolean)cmd.result){
+                        ui.jTextArea.append("[Application > Me] : Tarefa "+(String)cmd.args.listArgs.get(0)+" iniciada \n");
+                    }
+                    else{
+                        ui.jTextArea.append("[Application > Me] : Erro ao definir tarefa "+(String)cmd.args.listArgs.get(0)+"\n");
+                    }
                     break;
                 }
                 case "iniciar_tarefa":{
