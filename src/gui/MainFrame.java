@@ -8,8 +8,7 @@ package gui;
 import client.Client;
 import comands.Command;
 import java.io.IOException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -63,7 +62,8 @@ public class MainFrame extends javax.swing.JFrame {
         jTextFieldTrabalhos = new javax.swing.JTextField();
         jButton11 = new javax.swing.JButton();
         jComboBox2 = new javax.swing.JComboBox();
-        jButtonEmpregados = new javax.swing.JButton();
+        jButtonNewObject = new javax.swing.JButton();
+        jButtonAddObjects = new javax.swing.JButton();
         jPanel6 = new javax.swing.JPanel();
         jScrollPane3 = new javax.swing.JScrollPane();
         jTableTarefas = new javax.swing.JTable();
@@ -82,8 +82,6 @@ public class MainFrame extends javax.swing.JFrame {
         jTableTarefas1 = new javax.swing.JTable();
         jScrollPane11 = new javax.swing.JScrollPane();
         jTable2 = new javax.swing.JTable();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
         jPanel8 = new javax.swing.JPanel();
         jLabel5 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
@@ -181,7 +179,7 @@ public class MainFrame extends javax.swing.JFrame {
 
         jLabel9.setText("Universidade do Minho - Sistemas Distribuidos");
 
-        jLabel13.setText("Breve explicação sobre a aplicação.Breve explicação sobre a aplicação.Breve explicação sobre a aplicação.Breve explicação sobre a aplicação.");
+        jLabel13.setText("Breve explicação sobre a aplicação.");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -192,7 +190,7 @@ public class MainFrame extends javax.swing.JFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel6)
                     .addComponent(jLabel9)
-                    .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabel13))
                 .addContainerGap(551, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
@@ -203,31 +201,20 @@ public class MainFrame extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel6)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(207, Short.MAX_VALUE))
+                .addComponent(jLabel13)
+                .addContainerGap(245, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Home", jPanel2);
 
         jTableObjectos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null}
+
             },
             new String [] {
                 "Nome", "Quantidade"
             }
-        ) {
-            boolean[] canEdit = new boolean [] {
-                false, false
-            };
-
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
-            }
-        });
+        ));
         jTableObjectos.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jTableObjectosMouseClicked(evt);
@@ -250,10 +237,18 @@ public class MainFrame extends javax.swing.JFrame {
             }
         });
 
-        jButtonEmpregados.setText("Abastecer");
-        jButtonEmpregados.addActionListener(new java.awt.event.ActionListener() {
+        jButtonNewObject.setText("Novo Objecto");
+        jButtonNewObject.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonEmpregadosActionPerformed(evt);
+                jButtonNewObjectActionPerformed(evt);
+            }
+        });
+
+        jButtonAddObjects.setText("Abastecer");
+        jButtonAddObjects.setEnabled(false);
+        jButtonAddObjects.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonAddObjectsActionPerformed(evt);
             }
         });
 
@@ -264,7 +259,7 @@ public class MainFrame extends javax.swing.JFrame {
             .addGroup(jPanel5Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 780, Short.MAX_VALUE)
                     .addGroup(jPanel5Layout.createSequentialGroup()
                         .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel5Layout.createSequentialGroup()
@@ -273,7 +268,10 @@ public class MainFrame extends javax.swing.JFrame {
                                 .addComponent(jButton11)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jButtonEmpregados))
+                            .addGroup(jPanel5Layout.createSequentialGroup()
+                                .addComponent(jButtonNewObject)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jButtonAddObjects)))
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
@@ -286,9 +284,11 @@ public class MainFrame extends javax.swing.JFrame {
                     .addComponent(jButton11)
                     .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 273, Short.MAX_VALUE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 286, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButtonEmpregados)
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButtonNewObject)
+                    .addComponent(jButtonAddObjects))
                 .addContainerGap())
         );
 
@@ -296,10 +296,7 @@ public class MainFrame extends javax.swing.JFrame {
 
         jTableTarefas.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+
             },
             new String [] {
                 "Id", "Nome", "Tipo", "Utilizador"
@@ -346,10 +343,7 @@ public class MainFrame extends javax.swing.JFrame {
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null}
+
             },
             new String [] {
                 "Objecto", "Quantidade"
@@ -421,10 +415,7 @@ public class MainFrame extends javax.swing.JFrame {
 
         jTableTarefas1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+
             },
             new String [] {
                 "Id", "Nome", "Tipo", "Utilizador"
@@ -442,25 +433,13 @@ public class MainFrame extends javax.swing.JFrame {
 
         jTable2.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null}
+
             },
             new String [] {
                 "Objecto", "Quantidade"
             }
         ));
         jScrollPane11.setViewportView(jTable2);
-
-        jButton1.setText("Monotorizar");
-
-        jButton2.setText("Concluir");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
-            }
-        });
 
         javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
         jPanel7.setLayout(jPanel7Layout);
@@ -470,22 +449,15 @@ public class MainFrame extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel7Layout.createSequentialGroup()
-                        .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel7Layout.createSequentialGroup()
-                                .addComponent(jTextFieldCategorias2, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jButton18)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jComboBox6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 0, Short.MAX_VALUE))
-                            .addComponent(jScrollPane5, javax.swing.GroupLayout.DEFAULT_SIZE, 536, Short.MAX_VALUE))
+                        .addComponent(jTextFieldCategorias2, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jScrollPane11, javax.swing.GroupLayout.PREFERRED_SIZE, 234, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel7Layout.createSequentialGroup()
-                        .addComponent(jButton1)
+                        .addComponent(jButton18)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton2)
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                        .addComponent(jComboBox6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addComponent(jScrollPane5, javax.swing.GroupLayout.DEFAULT_SIZE, 536, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane11, javax.swing.GroupLayout.PREFERRED_SIZE, 234, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
         jPanel7Layout.setVerticalGroup(
@@ -498,16 +470,12 @@ public class MainFrame extends javax.swing.JFrame {
                     .addComponent(jComboBox6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane11, javax.swing.GroupLayout.DEFAULT_SIZE, 281, Short.MAX_VALUE)
+                    .addComponent(jScrollPane11, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                     .addComponent(jScrollPane5, javax.swing.GroupLayout.DEFAULT_SIZE, 273, Short.MAX_VALUE))
-                .addGap(11, 11, 11)
-                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
-                    .addComponent(jButton2))
-                .addContainerGap())
+                .addGap(45, 45, 45))
         );
 
-        jTabbedPane1.addTab("Tarefas a decorrer", jPanel7);
+        jTabbedPane1.addTab("Tarefas a serem monitorizadas", jPanel7);
 
         jLabel5.setText("Total de  Tarefas:");
 
@@ -662,7 +630,10 @@ public class MainFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_jButtonLoginActionPerformed
 
     private void jTableObjectosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableObjectosMouseClicked
-
+        if(jTableObjectos.getModel().getValueAt(jTableObjectos.getSelectedRow(), 0) != null)
+            jButtonAddObjects.setEnabled(true);
+        else
+            jButtonAddObjects.setEnabled(false);
     }//GEN-LAST:event_jTableObjectosMouseClicked
 
     private void jTextFieldTrabalhosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldTrabalhosActionPerformed
@@ -673,16 +644,33 @@ public class MainFrame extends javax.swing.JFrame {
 
     }//GEN-LAST:event_jComboBox2ActionPerformed
 
-    private void jButtonEmpregadosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonEmpregadosActionPerformed
-       
-    }//GEN-LAST:event_jButtonEmpregadosActionPerformed
+    private void jButtonNewObjectActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonNewObjectActionPerformed
+    String s = (String)JOptionPane.showInputDialog(
+        this,
+        "Introduza o nome do objecto:\n",
+        "Adicionar Objecto",
+        JOptionPane.PLAIN_MESSAGE,
+        null,
+        null,
+        "objecto");
+        
+        if((s != null) && (s.length() > 0)){
+            if(isconnected){
+                Command temp = new Command("abastecer",cliente.mac, new Object[]{s,0});
+                cliente.send(temp);
+                jTextArea.append("[Me > Application] : "+temp.toString()+" \n");
+            } 
+        }
+        else
+            jTextArea.append("[Application > Me] : Dados do objecto incompletos \n");       
+    }//GEN-LAST:event_jButtonNewObjectActionPerformed
 
     private void jTextFieldCategoriasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldCategoriasActionPerformed
 
     }//GEN-LAST:event_jTextFieldCategoriasActionPerformed
 
     private void jButton19ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton19ActionPerformed
-
+        
     }//GEN-LAST:event_jButton19ActionPerformed
 
     private void jComboBox3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox3ActionPerformed
@@ -744,9 +732,9 @@ public class MainFrame extends javax.swing.JFrame {
         
     }//GEN-LAST:event_jButton20ActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void jButtonAddObjectsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAddObjectsActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_jButtonAddObjectsActionPerformed
 
     /**
      * @param args the command line arguments
@@ -764,17 +752,10 @@ public class MainFrame extends javax.swing.JFrame {
                     break;
                 }
             }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(MainFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(MainFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(MainFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(MainFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
-        //</editor-fold>
-
+        
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
@@ -821,15 +802,14 @@ public class MainFrame extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton11;
     private javax.swing.JButton jButton16;
     private javax.swing.JButton jButton18;
     private javax.swing.JButton jButton19;
-    private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton20;
-    private javax.swing.JButton jButtonEmpregados;
+    private javax.swing.JButton jButtonAddObjects;
     public javax.swing.JButton jButtonLogin;
+    private javax.swing.JButton jButtonNewObject;
     public javax.swing.JButton jButtonSignUp;
     private javax.swing.JComboBox jComboBox2;
     private javax.swing.JComboBox jComboBox3;
@@ -865,7 +845,7 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane6;
     private javax.swing.JScrollPane jScrollPane7;
     private javax.swing.JSplitPane jSplitPane1;
-    public javax.swing.JTabbedPane jTabbedPane1;
+    private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTable jTable1;
     private javax.swing.JTable jTable2;
     public javax.swing.JTable jTableObjectos;
