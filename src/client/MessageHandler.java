@@ -9,6 +9,10 @@ package client;
 import comands.Command;
 import gui.MainFrame;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
+import javax.swing.RowFilter.Entry;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -86,11 +90,16 @@ public class MessageHandler {
                     break;
                 }
                 case "listar_items":{
-                    System.out.println((String)cmd.result);
+                    ui.jTextArea.append("[Application > Me] : Listar Tarefas\n\tDetalhes:"+cmd.toString()+"\n");
+                        
+                    DefaultTableModel model = (DefaultTableModel) ui.jTableObjectos.getModel();
+                    HashMap< String,Integer > temp = (HashMap< String,Integer >)cmd.result;
+                    for(Map.Entry<String,Integer> item :temp.entrySet())
+                        model.addRow(new Object[]{item.getKey(), item.getValue()});
                     break;
                 }
                 case "listar_tarefas":{
-                    System.out.println((String)cmd.result);
+                    
                     break;
                 }
                 case "listar_tarefas_activas":{

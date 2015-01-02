@@ -868,7 +868,7 @@ public class MainFrame extends javax.swing.JFrame {
     public javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTable jTable1;
     private javax.swing.JTable jTable2;
-    private javax.swing.JTable jTableObjectos;
+    public javax.swing.JTable jTableObjectos;
     private javax.swing.JTable jTableTarefas;
     private javax.swing.JTable jTableTarefas1;
     public javax.swing.JTextArea jTextArea;
