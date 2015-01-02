@@ -10,7 +10,13 @@ import gui.MainFrame;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.net.InetAddress;
+import java.net.NetworkInterface;
 import java.net.Socket;
+import java.net.SocketException;
+import java.net.UnknownHostException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -20,6 +26,7 @@ public class Client implements Runnable {
     
     public String host = "localhost";
     public int port = 1200;
+    public String mac;
     private final Socket socket;
     public ObjectInputStream In;
     public ObjectOutputStream Out;
@@ -32,6 +39,7 @@ public class Client implements Runnable {
     
     public Client()throws IOException{
         socket = new Socket(host,port);
+        mac = getMacAddress();
         
         Out = new ObjectOutputStream(socket.getOutputStream());
         Out.flush();
@@ -41,6 +49,7 @@ public class Client implements Runnable {
     public Client(MainFrame ui) throws IOException{
         this.ui = ui;
         socket = new Socket(host,port);
+        mac = getMacAddress();
         
         Out = new ObjectOutputStream(socket.getOutputStream());
         Out.flush();
@@ -51,6 +60,7 @@ public class Client implements Runnable {
         this.host = host;
         this.port = port;
         this.ui = ui;
+        mac = getMacAddress();
         
         socket = new Socket(host,port);
         
@@ -92,4 +102,23 @@ public class Client implements Runnable {
             System.out.println("Exception SocketClient send()");
         }
     }
+    
+    public String getMacAddress() throws UnknownHostException{
+        try {
+            InetAddress ip = InetAddress.getLocalHost();
+            NetworkInterface network = NetworkInterface.getByInetAddress(ip);
+            
+            byte[] mac = network.getHardwareAddress();
+            
+            StringBuilder sb = new StringBuilder();
+            for(int i= 0;i<mac.length;i++){
+                sb.append(String.format("%02X%s", mac[i],(i<mac.length)?"-":""));
+            }
+            return sb.toString();
+        } catch (SocketException ex) {
+            Logger.getLogger(Client.class.getName()).log(Level.SEVERE, null, ex);
+            return "";
+        }
+    }
+    
 }
