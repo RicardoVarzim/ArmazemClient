@@ -603,7 +603,7 @@ public class MainFrame extends javax.swing.JFrame {
 
         if(isconnected){
             if( !jTextUsername.getText().isEmpty() || !String.valueOf(jPasswordField.getPassword()).equals("")){
-                Command temp = new Command("registar_cliente","2", new Object[]{jTextUsername.getText(),String.valueOf(jPasswordField.getPassword())});
+                Command temp = new Command("registar_cliente",cliente.mac, new Object[]{jTextUsername.getText(),String.valueOf(jPasswordField.getPassword())});
                 cliente.send(temp);
                 jTextArea.append("[Me > Application] : "+temp.toString()+" \n");
             }
@@ -622,7 +622,7 @@ public class MainFrame extends javax.swing.JFrame {
 
             if(isconnected){
                 if( !jTextUsername.getText().isEmpty() || !String.valueOf(jPasswordField.getPassword()).equals("")){
-                    Command temp = new Command("cliente_login","2", new Object[]{jTextUsername.getText(),String.valueOf(jPasswordField.getPassword())});
+                    Command temp = new Command("cliente_login",cliente.mac, new Object[]{jTextUsername.getText(),String.valueOf(jPasswordField.getPassword())});
                     cliente.send(temp);
                     jTextArea.append("[Me > Application] : "+temp.toString()+" \n");
                 }
@@ -676,7 +676,7 @@ public class MainFrame extends javax.swing.JFrame {
     private void jTabbedPane1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTabbedPane1MouseClicked
         //Tab Utilizadores clicked
         if(isconnected){
-            Command temp = new Command("listar_clientes","2", new Object[]{""});
+            Command temp = new Command("listar_clientes",cliente.mac, new Object[]{""});
             cliente.send(temp);
             jTextArea.append("[Me > Application] : "+temp.toString()+" \n");
         }
@@ -744,7 +744,7 @@ public class MainFrame extends javax.swing.JFrame {
     
     public void clientDisconnect(){
         
-        Command temp = new Command("close","",new Object[]{""});
+        Command temp = new Command("close",cliente.mac,new Object[]{""});
         cliente.send(temp);
         islogged = false;
         isconnected = false;
