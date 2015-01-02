@@ -73,7 +73,7 @@ public class MainFrame extends javax.swing.JFrame {
         jButton20 = new javax.swing.JButton();
         jComboBox3 = new javax.swing.JComboBox();
         jScrollPane7 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        jTableTarefasObjeto = new javax.swing.JTable();
         jPanel7 = new javax.swing.JPanel();
         jComboBox6 = new javax.swing.JComboBox();
         jButton18 = new javax.swing.JButton();
@@ -344,7 +344,7 @@ public class MainFrame extends javax.swing.JFrame {
             }
         });
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        jTableTarefasObjeto.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null},
                 {null, null},
@@ -355,7 +355,7 @@ public class MainFrame extends javax.swing.JFrame {
                 "Objecto", "Quantidade"
             }
         ));
-        jScrollPane7.setViewportView(jTable1);
+        jScrollPane7.setViewportView(jTableTarefasObjeto);
 
         javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
         jPanel6.setLayout(jPanel6Layout);
@@ -866,11 +866,11 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane7;
     private javax.swing.JSplitPane jSplitPane1;
     public javax.swing.JTabbedPane jTabbedPane1;
-    private javax.swing.JTable jTable1;
     private javax.swing.JTable jTable2;
     public javax.swing.JTable jTableObjectos;
-    private javax.swing.JTable jTableTarefas;
+    public javax.swing.JTable jTableTarefas;
     private javax.swing.JTable jTableTarefas1;
+    public javax.swing.JTable jTableTarefasObjeto;
     public javax.swing.JTextArea jTextArea;
     private javax.swing.JTextField jTextFieldCategorias;
     private javax.swing.JTextField jTextFieldCategorias2;
