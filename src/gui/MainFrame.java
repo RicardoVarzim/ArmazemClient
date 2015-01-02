@@ -9,6 +9,7 @@ import client.Client;
 import comands.Command;
 import java.io.IOException;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -73,7 +74,7 @@ public class MainFrame extends javax.swing.JFrame {
         jButton20 = new javax.swing.JButton();
         jComboBox3 = new javax.swing.JComboBox();
         jScrollPane7 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        jTableTarefasObjeto = new javax.swing.JTable();
         jPanel7 = new javax.swing.JPanel();
         jComboBox6 = new javax.swing.JComboBox();
         jButton18 = new javax.swing.JButton();
@@ -341,7 +342,7 @@ public class MainFrame extends javax.swing.JFrame {
             }
         });
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        jTableTarefasObjeto.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -349,7 +350,7 @@ public class MainFrame extends javax.swing.JFrame {
                 "Objecto", "Quantidade"
             }
         ));
-        jScrollPane7.setViewportView(jTable1);
+        jScrollPane7.setViewportView(jTableTarefasObjeto);
 
         javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
         jPanel6.setLayout(jPanel6Layout);
@@ -687,9 +688,18 @@ public class MainFrame extends javax.swing.JFrame {
 
     private void jTabbedPane1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTabbedPane1MouseClicked
         if(isconnected){
+            DefaultTableModel model;
+            
             switch(jTabbedPane1.getSelectedIndex()){
                 case 1:
                 {
+                    model = (DefaultTableModel) jTableObjectos.getModel();
+                    
+                    int rows = model.getRowCount(); 
+                    for(int i = rows - 1; i >=0; i--)
+                    {
+                       model.removeRow(i); 
+                    }
                     Command temp = new Command("listar_items",cliente.mac, new Object[]{""});
                     cliente.send(temp);
                     jTextArea.append("[Me > Application] : "+temp.toString()+" \n");
@@ -697,6 +707,13 @@ public class MainFrame extends javax.swing.JFrame {
                 }
                 case 2:
                 {
+                    model = (DefaultTableModel) jTableTarefas.getModel();
+                    
+                    int rows = model.getRowCount(); 
+                    for(int i = rows - 1; i >=0; i--)
+                    {
+                       model.removeRow(i); 
+                    }
                     Command temp = new Command("listar_tarefas",cliente.mac, new Object[]{""});
                     cliente.send(temp);
                     jTextArea.append("[Me > Application] : "+temp.toString()+" \n");
@@ -704,6 +721,13 @@ public class MainFrame extends javax.swing.JFrame {
                 }
                 case 3:
                 {
+                    model = (DefaultTableModel) jTableTarefas1.getModel();
+                    
+                    int rows = model.getRowCount(); 
+                    for(int i = rows - 1; i >=0; i--)
+                    {
+                       model.removeRow(i); 
+                    }
                     Command temp = new Command("activas",cliente.mac, new Object[]{""});
                     cliente.send(temp);
                     jTextArea.append("[Me > Application] : "+temp.toString()+" \n");
@@ -733,7 +757,30 @@ public class MainFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton20ActionPerformed
 
     private void jButtonAddObjectsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAddObjectsActionPerformed
-        // TODO add your handling code here:
+        String selecteValue = (String) jTableObjectos.getModel().getValueAt(jTableObjectos.getSelectedRow(), 0);
+        String s = (String)JOptionPane.showInputDialog(
+        this,
+        "Introduza a quantidade:\n",
+        "Abastecer " + selecteValue,
+        JOptionPane.PLAIN_MESSAGE,
+        null,
+        null,
+        "10");
+        
+        if((s != null) && (s.length() > 0)){
+            try { 
+                int i = Integer.parseInt(s);
+                if(isconnected){
+                Command temp = new Command("abastecer",cliente.mac, new Object[]{selecteValue,i});
+                cliente.send(temp);
+                jTextArea.append("[Me > Application] : "+temp.toString()+" \n");
+            } 
+            } catch(NumberFormatException e) { 
+                jTextArea.append("[Application > Me] : Dados do objecto incompletos \n");
+            }
+        }
+        else
+            jTextArea.append("[Application > Me] : Dados do objecto incompletos \n");    
     }//GEN-LAST:event_jButtonAddObjectsActionPerformed
 
     /**
@@ -846,11 +893,11 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane7;
     private javax.swing.JSplitPane jSplitPane1;
     private javax.swing.JTabbedPane jTabbedPane1;
-    private javax.swing.JTable jTable1;
     private javax.swing.JTable jTable2;
     public javax.swing.JTable jTableObjectos;
-    private javax.swing.JTable jTableTarefas;
+    public javax.swing.JTable jTableTarefas;
     private javax.swing.JTable jTableTarefas1;
+    public javax.swing.JTable jTableTarefasObjeto;
     public javax.swing.JTextArea jTextArea;
     private javax.swing.JTextField jTextFieldCategorias;
     private javax.swing.JTextField jTextFieldCategorias2;
