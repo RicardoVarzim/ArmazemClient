@@ -391,6 +391,11 @@ public class MainFrame extends javax.swing.JFrame {
         });
 
         jButton20.setText("Criar Tarefa");
+        jButton20.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton20ActionPerformed(evt);
+            }
+        });
 
         jComboBox3.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Id", "Nome", "Tipo", "Utilizador" }));
         jComboBox3.addActionListener(new java.awt.event.ActionListener() {
@@ -833,6 +838,10 @@ public class MainFrame extends javax.swing.JFrame {
     private void jTextUsernameFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTextUsernameFocusLost
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextUsernameFocusLost
+
+    private void jButton20ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton20ActionPerformed
+        
+    }//GEN-LAST:event_jButton20ActionPerformed
 
     /**
      * @param args the command line arguments
