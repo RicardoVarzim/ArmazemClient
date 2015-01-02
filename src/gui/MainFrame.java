@@ -774,7 +774,7 @@ public class MainFrame extends javax.swing.JFrame {
                 Command temp = new Command("abastecer",cliente.mac, new Object[]{selecteValue,i});
                 cliente.send(temp);
                 jTextArea.append("[Me > Application] : "+temp.toString()+" \n");
-            } 
+            }  
             } catch(NumberFormatException e) { 
                 jTextArea.append("[Application > Me] : Dados do objecto incompletos \n");
             }
