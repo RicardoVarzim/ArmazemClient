@@ -107,19 +107,28 @@ public class MessageHandler {
                 }
                 case "listar_tarefas":{
                       ui.jTextArea.append("[Application > Me] : Listar Tarefas\n\tDetalhes:"+cmd.toString()+"\n");
-                        
-                    DefaultTableModel model = (DefaultTableModel) ui.jTableTarefas.getModel();
-                    //DefaultTableModel model1 = (DefaultTableModel) ui.jTableTarefasObjeto.getModel(); 
-                    TreeMap <String,TreeMap <String, Integer>> temp = (TreeMap < String,TreeMap <String, Integer>>)cmd.result;
-                    for(Map.Entry<String,TreeMap<String,Integer>> tarefa :temp.entrySet()){
-                        model.addRow(new Object[]{"", tarefa.getKey()});
-                        //int rows = model1.getRowCount(); 
-                        //for(int i = rows - 1; i >=0; i--)
-                        //{
-                           //model.removeRow(i); 
-                        //}
-                        //for(Map.Entry<String,Integer> item :tarefa.getValue().entrySet())-----A ver!! Inserir os objectos 
-                            //model1.addRow(new Object[]{item.getKey(), item.getValue()});
+                      int selectedIndex = jTabbedPane1.getSelectedIndex();
+
+                    if(selectedIndex==2){    
+                        DefaultTableModel model = (DefaultTableModel) ui.jTableTarefas.getModel();
+                        //DefaultTableModel model1 = (DefaultTableModel) ui.jTableTarefasObjeto.getModel(); 
+                        TreeMap <String,TreeMap <String, Integer>> temp = (TreeMap < String,TreeMap <String, Integer>>)cmd.result;
+                        for(Map.Entry<String,TreeMap<String,Integer>> tarefa :temp.entrySet()){
+                            model.addRow(new Object[]{"", tarefa.getKey()});
+                            //int rows = model1.getRowCount(); 
+                            //for(int i = rows - 1; i >=0; i--)
+                            //{
+                               //model.removeRow(i); 
+                            //}
+                            //for(Map.Entry<String,Integer> item :tarefa.getValue().entrySet())-----A ver!! Inserir os objectos 
+                                //model1.addRow(new Object[]{item.getKey(), item.getValue()});
+                        }
+                    }
+                    else if(selectedIndex==4){
+                        TreeMap <String,TreeMap <String, Integer>> temp = (TreeMap < String,TreeMap <String, Integer>>)cmd.result;
+                        ui.jLabel18.setText(Integer.toString(temp.size()));
+                        Integer aux= Integer.parseInt(ui.jLabel20.getText()) + temp.size();
+                        ui.jLabel10.setText(Integer.toString(aux));
                     }
                     break;
                 }
@@ -127,8 +136,12 @@ public class MessageHandler {
                     System.out.println((String)cmd.result);
                     break;
                 }
-                case "listar_tarefas_concluidas":{ // Não é pedido! 
-                    System.out.println((String)cmd.result);
+                case "listar_tarefas_concluidas":{ 
+                    ui.jTextArea.append("[Application > Me] : Listar Objectos\n\tDetalhes:"+cmd.toString()+"\n");
+                    HashMap< String,Integer > temp = (HashMap< String,Integer >)cmd.result;;
+                    ui.jLabel20.setText(Integer.toString(temp.size()));
+                    Integer aux= Integer.parseInt(ui.jLabel18.getText()) + temp.size();
+                    ui.jLabel10.setText(Integer.toString(aux));
                     break;
                 }
                 default:
