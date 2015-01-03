@@ -98,11 +98,22 @@ public class MessageHandler {
                 }
                 case "listar_items":{
                     ui.jTextArea.append("[Application > Me] : Listar Objectos\n\tDetalhes:"+cmd.toString()+"\n");
+                    if(ui.jTabbedPane1.getSelectedIndex()== 1){
+                        DefaultTableModel model = (DefaultTableModel) ui.jTableObjectos.getModel();
+                        HashMap< String,Integer > temp = (HashMap< String,Integer >)cmd.result;
+                        for(Map.Entry<String,Integer> item :temp.entrySet())
+                            model.addRow(new Object[]{item.getKey(), item.getValue()});    
+                    }
+                    if(ui.uitarefa.isVisible()){
+                        ui.jTextArea.append("Eu estive aqui!!!!\n");
+                        DefaultTableModel model = (DefaultTableModel) ui.uitarefa.jTableCriarTarefaItem.getModel();
+                        HashMap< String,Integer > temp = (HashMap< String,Integer >)cmd.result;
+                        for(Map.Entry<String,Integer> item :temp.entrySet())
+                            model.addRow(new Object[]{item.getKey(), item.getValue()});
                         
-                    DefaultTableModel model = (DefaultTableModel) ui.jTableObjectos.getModel();
-                    HashMap< String,Integer > temp = (HashMap< String,Integer >)cmd.result;
-                    for(Map.Entry<String,Integer> item :temp.entrySet())
-                        model.addRow(new Object[]{item.getKey(), item.getValue()});
+                    }
+                    
+                    
                     break;
                 }
                 case "listar_tarefas":{

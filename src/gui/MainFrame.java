@@ -771,6 +771,9 @@ public class MainFrame extends javax.swing.JFrame {
     private void jButton20ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton20ActionPerformed
         this.uitarefa = new CriarTarefa(cliente);
         this.uitarefa.setVisible(true);
+        Command temp = new Command("listar_items",cliente.mac, new Object[]{""});
+        cliente.send(temp);
+        jTextArea.append("[Me > Application] : "+temp.toString()+" \n");
     }//GEN-LAST:event_jButton20ActionPerformed
 
     private void jButtonAddObjectsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAddObjectsActionPerformed

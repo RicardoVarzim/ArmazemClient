@@ -33,7 +33,7 @@ public class CriarTarefa extends javax.swing.JFrame {
 
         jLabel1 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        jTableCriarTarefaItem = new javax.swing.JTable();
         jButton2 = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         jTextField1 = new javax.swing.JTextField();
@@ -45,7 +45,7 @@ public class CriarTarefa extends javax.swing.JFrame {
 
         jLabel1.setText("Criar Tarefa");
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        jTableCriarTarefaItem.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null},
                 {null, null},
@@ -64,7 +64,7 @@ public class CriarTarefa extends javax.swing.JFrame {
                 return types [columnIndex];
             }
         });
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(jTableCriarTarefaItem);
 
         jButton2.setText(">>>");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
@@ -202,10 +202,10 @@ public class CriarTarefa extends javax.swing.JFrame {
     private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JScrollPane jScrollPane1;
+    public javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTable jTable1;
     private javax.swing.JTable jTable2;
+    public javax.swing.JTable jTableCriarTarefaItem;
     private javax.swing.JTextField jTextField1;
     // End of variables declaration//GEN-END:variables
 }
