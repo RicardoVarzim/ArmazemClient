@@ -892,6 +892,12 @@ public class MainFrame extends javax.swing.JFrame {
     // End of variables declaration//GEN-END:variables
 
     private void EstatisticasUpdate() {
+        Command temp = new Command("listar_tarefas_concluidas",cliente.mac, new Object[]{""});
+        cliente.send(temp);
+        jTextArea.append("[Me > Application] : "+temp.toString()+" \n");
+        Command temp = new Command("listar_tarefas",cliente.mac, new Object[]{""});
+        cliente.send(temp);
+        jTextArea.append("[Me > Application] : "+temp.toString()+" \n");
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }
