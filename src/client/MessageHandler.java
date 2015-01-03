@@ -104,12 +104,12 @@ public class MessageHandler {
                         for(Map.Entry<String,Integer> item :temp.entrySet())
                             model.addRow(new Object[]{item.getKey(), item.getValue()});    
                     }
-                    if(ui.uitarefa.isVisible()){
+                    if(ui.uitarefa.jTableCriarTarefaItem.isShowing()){
                         ui.jTextArea.append("Eu estive aqui!!!!\n");
-                        DefaultTableModel model = (DefaultTableModel) ui.uitarefa.jTableCriarTarefaItem.getModel();
-                        HashMap< String,Integer > temp = (HashMap< String,Integer >)cmd.result;
-                        for(Map.Entry<String,Integer> item :temp.entrySet())
-                            model.addRow(new Object[]{item.getKey(), item.getValue()});
+                        DefaultTableModel model1 = (DefaultTableModel) ui.uitarefa.jTableCriarTarefaItem.getModel();
+                        HashMap< String,Integer > temp1 = (HashMap< String,Integer >)cmd.result;
+                        for(Map.Entry<String,Integer> item1 :temp1.entrySet())
+                            model1.addRow(new Object[]{item1.getKey(), item1.getValue()});
                         
                     }
                     

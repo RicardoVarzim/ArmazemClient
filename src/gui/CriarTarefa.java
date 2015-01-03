@@ -47,10 +47,7 @@ public class CriarTarefa extends javax.swing.JFrame {
 
         jTableCriarTarefaItem.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null}
+
             },
             new String [] {
                 "Objecto", "Quantidade"
@@ -92,10 +89,7 @@ public class CriarTarefa extends javax.swing.JFrame {
 
         jTable2.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null}
+
             },
             new String [] {
                 "Objecto", "Quantidade"
