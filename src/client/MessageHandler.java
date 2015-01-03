@@ -105,7 +105,6 @@ public class MessageHandler {
                             model.addRow(new Object[]{item.getKey(), item.getValue()});    
                     }
                     if(ui.uitarefa.jTableCriarTarefaItem.isShowing()){
-                        ui.jTextArea.append("Eu estive aqui!!!!\n");
                         DefaultTableModel model1 = (DefaultTableModel) ui.uitarefa.jTableCriarTarefaItem.getModel();
                         HashMap< String,Integer > temp1 = (HashMap< String,Integer >)cmd.result;
                         for(Map.Entry<String,Integer> item1 :temp1.entrySet())

@@ -669,6 +669,7 @@ public class MainFrame extends javax.swing.JFrame {
         "objecto");
         
         if((s != null) && (s.length() > 0)){
+           
             if(isconnected){
                 Command temp = new Command("abastecer",cliente.mac, new Object[]{s,0});
                 cliente.send(temp);
