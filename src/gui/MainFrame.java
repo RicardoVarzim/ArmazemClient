@@ -307,6 +307,12 @@ public class MainFrame extends javax.swing.JFrame {
 
         jTabbedPane1.addTab("Objectos", jPanel5);
 
+        jScrollPane3.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jScrollPane3MouseClicked(evt);
+            }
+        });
+
         jTableTarefas.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -321,6 +327,11 @@ public class MainFrame extends javax.swing.JFrame {
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
+            }
+        });
+        jTableTarefas.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTableTarefasMouseClicked(evt);
             }
         });
         jScrollPane3.setViewportView(jTableTarefas);
@@ -662,6 +673,9 @@ public class MainFrame extends javax.swing.JFrame {
                 Command temp = new Command("abastecer",cliente.mac, new Object[]{s,0});
                 cliente.send(temp);
                 jTextArea.append("[Me > Application] : "+temp.toString()+" \n");
+                Command temp1 = new Command("listar_items",cliente.mac, new Object[]{});
+                cliente.send(temp1);
+                jTextArea.append("[Me > Application] : "+temp1.toString()+" \n");
             } 
         }
         else
@@ -716,7 +730,7 @@ public class MainFrame extends javax.swing.JFrame {
                     {
                        model.removeRow(i); 
                     }
-                    Command temp = new Command("listar_tarefas",cliente.mac, new Object[]{""});
+                    Command temp = new Command("tipos_tarefas",cliente.mac, new Object[]{""});
                     cliente.send(temp);
                     jTextArea.append("[Me > Application] : "+temp.toString()+" \n");
                     break;
@@ -777,7 +791,7 @@ public class MainFrame extends javax.swing.JFrame {
                 Command temp = new Command("abastecer",cliente.mac, new Object[]{selecteValue,i});
                 cliente.send(temp);
                 jTextArea.append("[Me > Application] : "+temp.toString()+" \n");
-            }  
+                }  
             } catch(NumberFormatException e) { 
                 jTextArea.append("[Application > Me] : Dados do objecto incompletos \n");
             }
@@ -790,6 +804,20 @@ public class MainFrame extends javax.swing.JFrame {
         uiconfig = new Config(cliente);
         uiconfig.setVisible(true);
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jScrollPane3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jScrollPane3MouseClicked
+        
+    }//GEN-LAST:event_jScrollPane3MouseClicked
+
+    private void jTableTarefasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableTarefasMouseClicked
+        if(jTableTarefas.getModel().getValueAt(jTableTarefas.getSelectedRow(), 1) != null){
+            if(isconnected){
+                Command temp = new Command("items_tarefa",cliente.mac, new Object[]{jTableTarefas.getModel().getValueAt(jTableTarefas.getSelectedRow(), 1)});
+                cliente.send(temp);
+                jTextArea.append("[Me > Application] : "+temp.toString()+" \n");
+                }
+        }
+    }//GEN-LAST:event_jTableTarefasMouseClicked
 
     /**
      * @param args the command line arguments

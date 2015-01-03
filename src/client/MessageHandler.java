@@ -144,6 +144,48 @@ public class MessageHandler {
                     ui.jLabel10.setText(Integer.toString(aux));
                     break;
                 }
+                case "tipos_tarefas":{
+                    ui.jTextArea.append("[Application > Me] : Listar Tarefas\n\tDetalhes:"+cmd.toString()+"\n");
+                    int selectedIndex = ui.jTabbedPane1.getSelectedIndex();
+
+                    if(selectedIndex==2){ 
+                        DefaultTableModel model = (DefaultTableModel) ui.jTableTarefas.getModel();
+                        
+                        int rows = model.getRowCount(); 
+                        for(int i = rows - 1; i >=0; i--)
+                        {
+                           model.removeRow(i); 
+                        }
+                        
+                       ArrayList<String> temp = (ArrayList<String>)cmd.result;
+                        for(String tarefa :temp){
+                            model.addRow(new Object[]{"", tarefa});
+                            
+                        }
+                    }
+                    break;
+                }
+                case "items_tarefa":{
+                    ui.jTextArea.append("[Application > Me] : Listar Tarefas\n\tDetalhes:"+cmd.toString()+"\n");
+                    int selectedIndex = ui.jTabbedPane1.getSelectedIndex();
+
+                    if(selectedIndex==2){ 
+                        DefaultTableModel model = (DefaultTableModel) ui.jTableTarefasObjeto.getModel();
+                        
+                        int rows = model.getRowCount(); 
+                        for(int i = rows - 1; i >=0; i--)
+                        {
+                           model.removeRow(i); 
+                        }
+                        
+                        TreeMap<String, Integer> temp = (TreeMap<String, Integer>)cmd.result;
+                        for(Map.Entry<String, Integer> objecto :temp.entrySet()){
+                            model.addRow(new Object[]{ objecto.getKey(),objecto.getValue()});
+                            
+                        }
+                    }
+                    break;
+                }
                 default:
                     System.out.println((String)cmd.result);
             }
