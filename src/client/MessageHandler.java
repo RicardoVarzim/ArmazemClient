@@ -107,7 +107,7 @@ public class MessageHandler {
                 }
                 case "listar_tarefas":{
                       ui.jTextArea.append("[Application > Me] : Listar Tarefas\n\tDetalhes:"+cmd.toString()+"\n");
-                      int selectedIndex = jTabbedPane1.getSelectedIndex();
+                      int selectedIndex = ui.jTabbedPane1.getSelectedIndex();
 
                     if(selectedIndex==2){    
                         DefaultTableModel model = (DefaultTableModel) ui.jTableTarefas.getModel();
