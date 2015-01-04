@@ -104,34 +104,25 @@ public class MessageHandler {
                         for(Map.Entry<String,Integer> item :temp.entrySet())
                             model.addRow(new Object[]{item.getKey(), item.getValue()});    
                     }
-                    if(ui.uitarefa.jTableCriarTarefaItem.isShowing()){
+                    else if(ui.uitarefa.jTableCriarTarefaItem.isShowing()){
                         DefaultTableModel model1 = (DefaultTableModel) ui.uitarefa.jTableCriarTarefaItem.getModel();
                         HashMap< String,Integer > temp1 = (HashMap< String,Integer >)cmd.result;
                         for(Map.Entry<String,Integer> item1 :temp1.entrySet())
                             model1.addRow(new Object[]{item1.getKey(), item1.getValue()});
-                        
                     }
-                    
                     
                     break;
                 }
                 case "listar_tarefas":{
-                      ui.jTextArea.append("[Application > Me] : Listar Tarefas\n\tDetalhes:"+cmd.toString()+"\n");
-                      int selectedIndex = ui.jTabbedPane1.getSelectedIndex();
+                    ui.jTextArea.append("[Application > Me] : Listar Tarefas\n\tDetalhes:"+cmd.toString()+"\n");
+                    int selectedIndex = ui.jTabbedPane1.getSelectedIndex();
 
                     if(selectedIndex==2){    
-                        DefaultTableModel model = (DefaultTableModel) ui.jTableTarefas.getModel();
-                        //DefaultTableModel model1 = (DefaultTableModel) ui.jTableTarefasObjeto.getModel(); 
+                        DefaultTableModel model = (DefaultTableModel) ui.jTableTiposTarefas.getModel();
+                        
                         TreeMap <String,TreeMap <String, Integer>> temp = (TreeMap < String,TreeMap <String, Integer>>)cmd.result;
                         for(Map.Entry<String,TreeMap<String,Integer>> tarefa :temp.entrySet()){
                             model.addRow(new Object[]{"", tarefa.getKey()});
-                            //int rows = model1.getRowCount(); 
-                            //for(int i = rows - 1; i >=0; i--)
-                            //{
-                               //model.removeRow(i); 
-                            //}
-                            //for(Map.Entry<String,Integer> item :tarefa.getValue().entrySet())-----A ver!! Inserir os objectos 
-                                //model1.addRow(new Object[]{item.getKey(), item.getValue()});
                         }
                     }
                     else if(selectedIndex==4){
@@ -159,7 +150,7 @@ public class MessageHandler {
                     int selectedIndex = ui.jTabbedPane1.getSelectedIndex();
 
                     if(selectedIndex==2){ 
-                        DefaultTableModel model = (DefaultTableModel) ui.jTableTarefas.getModel();
+                        DefaultTableModel model = (DefaultTableModel) ui.jTableTiposTarefas.getModel();
                         
                         int rows = model.getRowCount(); 
                         for(int i = rows - 1; i >=0; i--)
