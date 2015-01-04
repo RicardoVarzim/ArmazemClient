@@ -774,30 +774,32 @@ public class MainFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton20ActionPerformed
 
     private void jButtonAddObjectsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAddObjectsActionPerformed
-        String selecteValue = (String) jTableObjectos.getModel().getValueAt(jTableObjectos.getSelectedRow(), 0);
-        String s = (String)JOptionPane.showInputDialog(
-        this,
-        "Introduza a quantidade:\n",
-        "Abastecer " + selecteValue,
-        JOptionPane.PLAIN_MESSAGE,
-        null,
-        null,
-        "10");
+        if(jTableObjectos.getModel().getValueAt(jTableObjectos.getSelectedRow(), 1) != null){
         
-        if((s != null) && (s.length() > 0)){
-            try { 
-                int i = Integer.parseInt(s);
-                if(isconnected){
-                Command temp = new Command("abastecer",cliente.mac, new Object[]{selecteValue,i});
-                cliente.send(temp);
-                jTextArea.append("[Me > Application] : "+temp.toString()+" \n");
-                }  
-            } catch(NumberFormatException e) { 
-                jTextArea.append("[Application > Me] : Dados do objecto incompletos \n");
+            String selecteValue = (String) jTableObjectos.getModel().getValueAt(jTableObjectos.getSelectedRow(), 0);
+
+            String s = (String)JOptionPane.showInputDialog(this,"Introduza a quantidade:\n","Abastecer " + selecteValue,JOptionPane.PLAIN_MESSAGE,null,null,"10");
+            
+            if((s != null) && (s.length() > 0)){
+                try { 
+                    int i = Integer.parseInt(s);
+                    if(isconnected){
+                    Command temp = new Command("abastecer",cliente.mac, new Object[]{selecteValue,i});
+                    cliente.send(temp);
+                    jTextArea.append("[Me > Application] : "+temp.toString()+" \n");
+                    }  
+                } catch(NumberFormatException e) { 
+                    jTextArea.append("[Application > Me] : Dados do objecto incompletos \n");
+                }
             }
+            else
+                jTextArea.append("[Application > Me] : Dados do objecto incompletos \n");
         }
-        else
-            jTextArea.append("[Application > Me] : Dados do objecto incompletos \n");    
+        
+        
+        
+        
+        
     }//GEN-LAST:event_jButtonAddObjectsActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
