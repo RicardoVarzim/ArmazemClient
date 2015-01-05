@@ -12,7 +12,10 @@ package client;
 public class ClientDetails {
     
     private String _nome;
-    private String _password;
+    
+    public ClientDetails(){
+        _nome = "";
+    }
     
     public String getCliente(){
        return _nome;
@@ -21,12 +24,5 @@ public class ClientDetails {
     public void setCliente(String c){
        _nome = c;
     }
-    
-    public String getPassword(){
-       return _password;
-    }
-    
-    public void setPassword(String p){
-       _password = p;
-    }
+   
 }

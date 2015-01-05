@@ -34,12 +34,12 @@ public class Client implements Runnable {
     public MainFrame ui;
     public boolean keepRunning;
     
-    //TODO:
     public ClientDetails cliente;
     
     public Client()throws IOException{
         socket = new Socket(host,port);
         mac = getMacAddress();
+        cliente = new ClientDetails();
         
         Out = new ObjectOutputStream(socket.getOutputStream());
         Out.flush();
@@ -50,6 +50,7 @@ public class Client implements Runnable {
         this.ui = ui;
         socket = new Socket(host,port);
         mac = getMacAddress();
+        cliente = new ClientDetails();
         
         Out = new ObjectOutputStream(socket.getOutputStream());
         Out.flush();
@@ -61,6 +62,7 @@ public class Client implements Runnable {
         this.port = port;
         this.ui = ui;
         mac = getMacAddress();
+        cliente = new ClientDetails();
         
         socket = new Socket(host,port);
         

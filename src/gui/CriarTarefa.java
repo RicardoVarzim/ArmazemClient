@@ -8,6 +8,7 @@ package gui;
 import client.Client;
 import comands.Command;
 import java.util.TreeMap;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 
@@ -75,6 +76,7 @@ public class CriarTarefa extends javax.swing.JFrame {
         jScrollPane1.setViewportView(jTableCriarTarefaItem);
 
         jButton2.setText(">>>");
+        jButton2.setEnabled(false);
         jButton2.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jButton2MouseClicked(evt);
@@ -97,6 +99,7 @@ public class CriarTarefa extends javax.swing.JFrame {
         });
 
         jButton1.setText("<<<");
+        jButton1.setEnabled(false);
         jButton1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jButton1MouseClicked(evt);
@@ -230,15 +233,20 @@ public class CriarTarefa extends javax.swing.JFrame {
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // Criar Tarefa
-        //jTextNomeTarefa
-        TreeMap< String,Integer > items = new TreeMap<String,Integer>();
-        int rowcount = jTableCriarTarefaUsedItem.getModel().getRowCount();
-        for(int i=0;i<rowcount;i++)
-            items.put((String)jTableCriarTarefaUsedItem.getValueAt(i, 0), Integer.parseInt((String)jTableCriarTarefaUsedItem.getValueAt(i, 1)));
-        Command temp = new Command("definir_tarefa",cliente.mac,new Object[]{jTextNomeTarefa.getText(),items});
-        cliente.send(temp);
+        if(!jTextNomeTarefa.getText().isEmpty()){
+            TreeMap< String,Integer > items = new TreeMap<String,Integer>();
+            int rowcount = jTableCriarTarefaUsedItem.getModel().getRowCount();
+            for(int i=0;i<rowcount;i++)
+                items.put((String)jTableCriarTarefaUsedItem.getValueAt(i, 0), Integer.parseInt((String)jTableCriarTarefaUsedItem.getValueAt(i, 1)));
+            Command temp = new Command("definir_tarefa",cliente.mac,new Object[]{jTextNomeTarefa.getText(),items});
+            cliente.send(temp);
+
+            this.setVisible(false);
+        }
+        else{
+            JOptionPane.showMessageDialog(this,"Nome inválido.", "Erro", JOptionPane.WARNING_MESSAGE);
+        }
         
-        this.setVisible(false);
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jTableCriarTarefaItemMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableCriarTarefaItemMouseClicked

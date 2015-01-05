@@ -18,7 +18,7 @@ import javax.swing.table.DefaultTableModel;
  */
 public class MainFrame extends javax.swing.JFrame {
 
-    private Client cliente;
+    public Client cliente;
     public Thread clientThread;
     public CriarTarefa uitarefa;
     public Config uiconfig;
@@ -67,17 +67,17 @@ public class MainFrame extends javax.swing.JFrame {
         jPanel6 = new javax.swing.JPanel();
         jScrollPane3 = new javax.swing.JScrollPane();
         jTableTiposTarefas = new javax.swing.JTable();
-        jButton19 = new javax.swing.JButton();
+        jButtonIniciarTarefa = new javax.swing.JButton();
         jButton20 = new javax.swing.JButton();
         jScrollPane7 = new javax.swing.JScrollPane();
         jTableTarefasObjeto = new javax.swing.JTable();
         jPanel7 = new javax.swing.JPanel();
         jScrollPane5 = new javax.swing.JScrollPane();
-        jTableTarefas1 = new javax.swing.JTable();
+        jTableTarefas = new javax.swing.JTable();
         jScrollPane11 = new javax.swing.JScrollPane();
         jTable2 = new javax.swing.JTable();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
+        jButtonMonotorizar = new javax.swing.JButton();
+        jButtonConcluir = new javax.swing.JButton();
         jPanel8 = new javax.swing.JPanel();
         jLabel5 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
@@ -283,11 +283,11 @@ public class MainFrame extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Id", "Nome", "Tipo", "Utilizador"
+                "Tipo"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false
+                false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -301,10 +301,11 @@ public class MainFrame extends javax.swing.JFrame {
         });
         jScrollPane3.setViewportView(jTableTiposTarefas);
 
-        jButton19.setText("Iniciar Tarefa");
-        jButton19.addActionListener(new java.awt.event.ActionListener() {
+        jButtonIniciarTarefa.setText("Iniciar Tarefa");
+        jButtonIniciarTarefa.setEnabled(false);
+        jButtonIniciarTarefa.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton19ActionPerformed(evt);
+                jButtonIniciarTarefaActionPerformed(evt);
             }
         });
 
@@ -337,7 +338,7 @@ public class MainFrame extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, 234, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel6Layout.createSequentialGroup()
-                        .addComponent(jButton19)
+                        .addComponent(jButtonIniciarTarefa)
                         .addGap(6, 6, 6)
                         .addComponent(jButton20)
                         .addGap(0, 598, Short.MAX_VALUE)))
@@ -353,29 +354,34 @@ public class MainFrame extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton20)
-                    .addComponent(jButton19))
+                    .addComponent(jButtonIniciarTarefa))
                 .addContainerGap())
         );
 
         jTabbedPane1.addTab("Tipos de Tarefas", jPanel6);
 
-        jTableTarefas1.setModel(new javax.swing.table.DefaultTableModel(
+        jTableTarefas.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "Id", "Nome", "Tipo", "Utilizador"
+                "Id", "Tipo", "Estado"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false
+                false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane5.setViewportView(jTableTarefas1);
+        jTableTarefas.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTableTarefasMouseClicked(evt);
+            }
+        });
+        jScrollPane5.setViewportView(jTableTarefas);
 
         jTable2.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -387,9 +393,20 @@ public class MainFrame extends javax.swing.JFrame {
         ));
         jScrollPane11.setViewportView(jTable2);
 
-        jButton2.setText("Monotorizar");
+        jButtonMonotorizar.setText("Monotorizar");
+        jButtonMonotorizar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonMonotorizarActionPerformed(evt);
+            }
+        });
 
-        jButton3.setText("Concluir");
+        jButtonConcluir.setText("Concluir");
+        jButtonConcluir.setEnabled(false);
+        jButtonConcluir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonConcluirActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
         jPanel7.setLayout(jPanel7Layout);
@@ -403,9 +420,9 @@ public class MainFrame extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jScrollPane11, javax.swing.GroupLayout.PREFERRED_SIZE, 234, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel7Layout.createSequentialGroup()
-                        .addComponent(jButton2)
+                        .addComponent(jButtonMonotorizar)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton3)
+                        .addComponent(jButtonConcluir)
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
@@ -418,8 +435,8 @@ public class MainFrame extends javax.swing.JFrame {
                     .addComponent(jScrollPane5, javax.swing.GroupLayout.DEFAULT_SIZE, 315, Short.MAX_VALUE))
                 .addGap(11, 11, 11)
                 .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton2)
-                    .addComponent(jButton3))
+                    .addComponent(jButtonMonotorizar)
+                    .addComponent(jButtonConcluir))
                 .addContainerGap())
         );
 
@@ -469,7 +486,7 @@ public class MainFrame extends javax.swing.JFrame {
                     .addComponent(jLabel11)
                     .addComponent(jLabel18)
                     .addComponent(jLabel20))
-                .addContainerGap(630, Short.MAX_VALUE))
+                .addContainerGap(528, Short.MAX_VALUE))
         );
         jPanel8Layout.setVerticalGroup(
             jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -494,7 +511,7 @@ public class MainFrame extends javax.swing.JFrame {
                 .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel8)
                     .addComponent(jLabel12))
-                .addContainerGap(174, Short.MAX_VALUE))
+                .addContainerGap(191, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Estatisticas", jPanel8);
@@ -554,6 +571,7 @@ public class MainFrame extends javax.swing.JFrame {
                 if( !jTextUsername.getText().isEmpty() || !String.valueOf(jPasswordField.getPassword()).equals("")){
                     Command temp = new Command("cliente_login",cliente.mac, new Object[]{jTextUsername.getText(),String.valueOf(jPasswordField.getPassword())});
                     cliente.send(temp);
+                    cliente.cliente.setCliente(jTextUsername.getText());
                     jTextArea.append("[Me > Application] : "+temp.toString()+" \n");
                 }
                 else
@@ -600,9 +618,15 @@ public class MainFrame extends javax.swing.JFrame {
             jTextArea.append("[Application > Me] : Dados do objecto incompletos \n");       
     }//GEN-LAST:event_jButtonNewObjectActionPerformed
 
-    private void jButton19ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton19ActionPerformed
-        
-    }//GEN-LAST:event_jButton19ActionPerformed
+    private void jButtonIniciarTarefaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonIniciarTarefaActionPerformed
+        if(isconnected){
+            if(jTableTiposTarefas.getModel().getValueAt(jTableTiposTarefas.getSelectedRow(), 0) != null){
+                Command temp = new Command("iniciar_tarefa",cliente.mac, new Object[]{(String)jTableTiposTarefas.getModel().getValueAt(jTableTiposTarefas.getSelectedRow(), 0)});
+                cliente.send(temp);
+                jTextArea.append("[Me > Application] : "+temp.toString()+" \n");
+            }
+        }
+    }//GEN-LAST:event_jButtonIniciarTarefaActionPerformed
 
     private void jTabbedPane1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTabbedPane1MouseClicked
         if(isconnected){
@@ -639,16 +663,20 @@ public class MainFrame extends javax.swing.JFrame {
                 }
                 case 3:
                 {
-                    model = (DefaultTableModel) jTableTarefas1.getModel();
+                    model = (DefaultTableModel) jTableTarefas.getModel();
                     
                     int rows = model.getRowCount(); 
                     for(int i = rows - 1; i >=0; i--)
                     {
                        model.removeRow(i); 
                     }
-                    Command temp = new Command("activas",cliente.mac, new Object[]{""});
+                    
+                    Command temp = new Command("listar_tarefas_concluidas",cliente.mac, new Object[]{""});
                     cliente.send(temp);
                     jTextArea.append("[Me > Application] : "+temp.toString()+" \n");
+                    Command temp1 = new Command("listar_real_concluidas",cliente.mac, new Object[]{""});
+                    cliente.send(temp1);
+                    jTextArea.append("[Me > Application] : "+temp1.toString()+" \n");
                     break;
                 }
                 case 4:
@@ -704,11 +732,6 @@ public class MainFrame extends javax.swing.JFrame {
             else
                 jTextArea.append("[Application > Me] : Dados do objecto incompletos \n");
         }
-        
-        
-        
-        
-        
     }//GEN-LAST:event_jButtonAddObjectsActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
@@ -721,14 +744,50 @@ public class MainFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_jScrollPane3MouseClicked
 
     private void jTableTiposTarefasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableTiposTarefasMouseClicked
-        if(jTableTiposTarefas.getModel().getValueAt(jTableTiposTarefas.getSelectedRow(), 1) != null){
+        if(jTableTiposTarefas.getModel().getValueAt(jTableTiposTarefas.getSelectedRow(), 0) != null){
+            jButtonIniciarTarefa.setEnabled(true);
             if(isconnected){
-                Command temp = new Command("items_tarefa",cliente.mac, new Object[]{jTableTiposTarefas.getModel().getValueAt(jTableTiposTarefas.getSelectedRow(), 1)});
+                Command temp = new Command("items_tarefa",cliente.mac, new Object[]{jTableTiposTarefas.getModel().getValueAt(jTableTiposTarefas.getSelectedRow(), 0)});
+                cliente.send(temp);
+                jTextArea.append("[Me > Application] : "+temp.toString()+" \n");
+                }
+        }else{
+            jButtonIniciarTarefa.setEnabled(false);
+        }
+    }//GEN-LAST:event_jTableTiposTarefasMouseClicked
+
+    private void jButtonMonotorizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonMonotorizarActionPerformed
+        if(jTableTarefas.getModel().getValueAt(jTableTarefas.getSelectedRow(), 1) != null){
+            if(isconnected){
+            Command temp = new Command("pedido_notificacao",cliente.mac, new Object[]{jTableTarefas.getModel().getValueAt(jTableTarefas.getSelectedRow(), 1)});
+            cliente.send(temp);
+            jTextArea.append("[Me > Application] : "+temp.toString()+" \n");
+            }
+        }
+    }//GEN-LAST:event_jButtonMonotorizarActionPerformed
+
+    private void jButtonConcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonConcluirActionPerformed
+        // Concluir tarefa
+        if(jTableTarefas.getModel().getValueAt(jTableTarefas.getSelectedRow(), 0) != null){
+            if(isconnected){
+                Command temp = new Command("concluir_tarefa",cliente.mac, new Object[]{jTableTarefas.getModel().getValueAt(jTableTarefas.getSelectedRow(), 0)});
                 cliente.send(temp);
                 jTextArea.append("[Me > Application] : "+temp.toString()+" \n");
                 }
         }
-    }//GEN-LAST:event_jTableTiposTarefasMouseClicked
+    }//GEN-LAST:event_jButtonConcluirActionPerformed
+
+    private void jTableTarefasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableTarefasMouseClicked
+        if(jTableTarefas.getModel().getValueAt(jTableTarefas.getSelectedRow(), 0) != null){
+            String estado = (String)jTableTarefas.getModel().getValueAt(jTableTarefas.getSelectedRow(), 2);
+            if(estado == "Executada" || estado == "Activa")
+                jButtonConcluir.setEnabled(true);
+            else
+                jButtonConcluir.setEnabled(false);
+        }   
+        else
+            jButtonAddObjects.setEnabled(false);
+    }//GEN-LAST:event_jTableTarefasMouseClicked
 
     /**
      * @param args the command line arguments
@@ -797,12 +856,12 @@ public class MainFrame extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton19;
-    private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton20;
-    private javax.swing.JButton jButton3;
     private javax.swing.JButton jButtonAddObjects;
+    private javax.swing.JButton jButtonConcluir;
+    private javax.swing.JButton jButtonIniciarTarefa;
     public javax.swing.JButton jButtonLogin;
+    private javax.swing.JButton jButtonMonotorizar;
     private javax.swing.JButton jButtonNewObject;
     public javax.swing.JButton jButtonSignUp;
     public javax.swing.JLabel jLabel10;
@@ -837,7 +896,7 @@ public class MainFrame extends javax.swing.JFrame {
     public javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTable jTable2;
     public javax.swing.JTable jTableObjectos;
-    private javax.swing.JTable jTableTarefas1;
+    public javax.swing.JTable jTableTarefas;
     public javax.swing.JTable jTableTarefasObjeto;
     public javax.swing.JTable jTableTiposTarefas;
     public javax.swing.JTextArea jTextArea;
