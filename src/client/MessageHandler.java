@@ -76,9 +76,12 @@ public class MessageHandler {
                     break;
                 }
                 case "concluir_tarefa":{
-                    if((boolean)cmd.result){
-                        ui.jTextArea.append("[Application > Me] : Tarefa "+(String)cmd.args.listArgs.get(0)+"\n");
+                    if((String)cmd.result != null){
+                        ui.jTextArea.append("[Application > Me] : "+(String)cmd.result+"\n");
                         //ui.jTabbedPane1.selectedIndex(2) actualizar a lista de tarefas a s!!!
+                    }else{
+                        ui.jTextArea.append("[Application > Me] : Erro ao concluir tarefa\n");
+                        
                     }
                     break;
                 }

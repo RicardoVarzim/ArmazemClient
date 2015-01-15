@@ -770,7 +770,7 @@ public class MainFrame extends javax.swing.JFrame {
         // Concluir tarefa
         if(jTableTarefas.getModel().getValueAt(jTableTarefas.getSelectedRow(), 0) != null){
             if(isconnected){
-                Command temp = new Command("concluir_tarefa",cliente.mac, new Object[]{jTableTarefas.getModel().getValueAt(jTableTarefas.getSelectedRow(), 0)});
+                Command temp = new Command("concluir_tarefa",cliente.mac, new Object[]{(Long)jTableTarefas.getModel().getValueAt(jTableTarefas.getSelectedRow(), 0)});
                 cliente.send(temp);
                 jTextArea.append("[Me > Application] : "+temp.toString()+" \n");
                 }

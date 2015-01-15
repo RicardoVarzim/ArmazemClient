@@ -85,6 +85,7 @@ public class Client implements Runnable {
                 
             } catch (Exception ex) {
                 keepRunning = false;
+                ui.clientDisconnect();
                 System.out.println("Connection Failure");
             } 
         }
